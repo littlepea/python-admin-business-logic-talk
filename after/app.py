@@ -2,10 +2,10 @@ import urllib2
 import json
 
 from aqi import Station
+from cache import cache
 
 
 API_BASE = 'https://api.openaq.org/v1/latest'
-CACHE = {}
 
 
 def _get_city_url(city):
@@ -27,20 +27,14 @@ def _get_station_pm25(station):
             return measurement['value']
 
 
+@cache
 def get_stations(city):
-    # Check cache
-    stations = CACHE.get(city, [])
-
-    if not stations:
-        for result in _load_results(_get_city_url(city)):
-            stations.append(Station(
-                name=result['location'],
-                pm25=_get_station_pm25(result)))
-
-        # Write to cache
-        CACHE[city] = stations
-
-    return stations
+    return [
+        Station(
+            name=result['location'],
+            pm25=_get_station_pm25(result))
+        for result in _load_results(_get_city_url(city))
+    ]
 
 
 def get_recommendation(level):
