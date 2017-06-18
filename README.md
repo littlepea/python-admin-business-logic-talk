@@ -1,5 +1,8 @@
 # Separating Administrative and Business Logic in Python
 
+* Presented at: [Beijing Python Meetup - June 12, 2017](https://www.meetup.com/Beijing-Python/events/240004975/)
+* [Slides](https://littlepea.github.io/python-admin-business-logic-talk/)
+
 ## Talk Description
 
 * Title: Separating Administrative and Business Logic in Python
